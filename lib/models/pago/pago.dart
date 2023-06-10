@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../constantes.dart';
+
 part 'pago.g.dart';
 
 @JsonSerializable()
@@ -10,13 +12,14 @@ class Pago {
     this.folio,
     required this.concepto,
     required this.total,
+    this.status = statusActivo,
   });
 
   factory Pago.fromJson(Map<String, dynamic> data) => _$PagoFromJson(data);
 
   final int? pagoId;
   final int? operadorId;
-  final int? folio;
+  final int? folio, status;
   final String concepto;
   final double total;
 

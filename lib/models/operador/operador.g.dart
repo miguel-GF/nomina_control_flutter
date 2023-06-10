@@ -11,11 +11,13 @@ Operador _$OperadorFromJson(Map<String, dynamic> json) => Operador(
       folio: json['folio'] as int?,
       nombre: json['nombre'] as String,
       apellidos: json['apellidos'] as String,
+      status: json['status'] as int? ?? statusActivo,
     );
 
 Map<String, dynamic> _$OperadorToJson(Operador instance) => <String, dynamic>{
       'clienteId': instance.clienteId,
       'folio': instance.folio,
+      'status': instance.status,
       'nombre': instance.nombre,
       'apellidos': instance.apellidos,
     };

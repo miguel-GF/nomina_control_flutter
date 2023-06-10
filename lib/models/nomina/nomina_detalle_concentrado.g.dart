@@ -15,6 +15,7 @@ NominaDetalleConcentrado _$NominaDetalleConcentradoFromJson(
       pagoId: json['pagoId'] as int?,
       folio: json['folio'] as int?,
       total: (json['total'] as num).toDouble(),
+      status: json['status'] as int? ?? statusActivo,
     );
 
 Map<String, dynamic> _$NominaDetalleConcentradoToJson(
@@ -25,5 +26,6 @@ Map<String, dynamic> _$NominaDetalleConcentradoToJson(
       'nominaDetalleId': instance.nominaDetalleId,
       'pagoId': instance.pagoId,
       'folio': instance.folio,
+      'status': instance.status,
       'total': instance.total,
     };

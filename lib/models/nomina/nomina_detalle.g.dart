@@ -13,6 +13,7 @@ NominaDetalle _$NominaDetalleFromJson(Map<String, dynamic> json) =>
       operadorId: json['operadorId'] as int,
       folio: json['folio'] as int?,
       totalPagos: (json['totalPagos'] as num).toDouble(),
+      status: json['status'] as int? ?? statusActivo,
     );
 
 Map<String, dynamic> _$NominaDetalleToJson(NominaDetalle instance) =>
@@ -21,5 +22,6 @@ Map<String, dynamic> _$NominaDetalleToJson(NominaDetalle instance) =>
       'nominaId': instance.nominaId,
       'operadorId': instance.operadorId,
       'folio': instance.folio,
+      'status': instance.status,
       'totalPagos': instance.totalPagos,
     };
