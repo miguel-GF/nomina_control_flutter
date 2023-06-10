@@ -1,5 +1,5 @@
 name: nomina_control
-description: Proyecto para control de nómina de operadores, desarrollado con Flutter 3.3.10.
+description: Aplicación para control de nómina de operadores, desarrollado con Flutter 3.3.10.
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
@@ -10,10 +10,12 @@ environment:
 
 dependencies:
   animated_bottom_navigation_bar: ^1.2.0
+  auto_size_text: ^3.0.0
   build_runner: ^2.3.3
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
+  flutter_staggered_animations: ^1.1.1
   get: ^4.6.5
   json_annotation: ^4.8.0
   lottie: ^2.3.2
