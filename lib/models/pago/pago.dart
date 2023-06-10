@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../constantes.dart';
+import '../../constants.dart';
 
 part 'pago.g.dart';
 
