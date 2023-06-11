@@ -17,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Future<void> didChangeDependencies() async {
     if (_esInicio) {
-      await Future<void>.delayed(const Duration(seconds: 3));
+      await Future<void>.delayed(const Duration(seconds: 4));
       setState(() {
         _esInicio = false;
       });
