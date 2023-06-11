@@ -2,6 +2,8 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/home/opciones_menu.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -13,16 +15,17 @@ class _HomeScreenState extends State<HomeScreen> {
   int _bottomNavIndex = 0;
   AutoSizeGroup autoSizeGroup = AutoSizeGroup();
 
-  final List<Map<String, dynamic>> menuList = <Map<String, dynamic>>[
+  final List<Map<String, dynamic>> bottomNavigationList =
+      <Map<String, dynamic>>[
     <String, dynamic>{'icono': Icons.home_outlined, 'titulo': 'Home'},
     <String, dynamic>{
       'icono': Icons.settings_outlined,
-      'titulo': 'Configuración'
+      'titulo': 'Configuración',
     },
   ];
 
   String _obtenerTitulo() {
-    return menuList[_bottomNavIndex]['titulo'].toString();
+    return bottomNavigationList[_bottomNavIndex]['titulo'].toString();
   }
 
   @override
@@ -35,19 +38,23 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Visibility(
-              visible: _bottomNavIndex == 0,
-              child: const Text('Soy el Home'),
+            Expanded(
+              child: Visibility(
+                visible: _bottomNavIndex == 0,
+                child: const OpcionesMenu(),
+              ),
             ),
-            Visibility(
-              visible: _bottomNavIndex == 1,
-              child: const Text('Soy configuraciones'),
+            Expanded(
+              child: Visibility(
+                visible: _bottomNavIndex == 1,
+                child: const Text('Soy configuraciones'),
+              ),
             ),
           ],
         ),
       ),
       bottomNavigationBar: AnimatedBottomNavigationBar.builder(
-        itemCount: menuList.length,
+        itemCount: bottomNavigationList.length,
         activeIndex: _bottomNavIndex,
         backgroundColor: Colors.black54,
         onTap: (int index) => setState(() => _bottomNavIndex = index),
@@ -64,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Icon(
-                    menuList[index]['icono'],
+                    bottomNavigationList[index]['icono'],
                     size: 24,
                     color: color,
                   ),
@@ -74,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 9),
                       child: AutoSizeText(
-                        menuList[index]['titulo'],
+                        bottomNavigationList[index]['titulo'],
                         maxLines: 1,
                         style: TextStyle(color: color),
                         group: autoSizeGroup,
