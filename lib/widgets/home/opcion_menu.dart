@@ -23,6 +23,9 @@ class OpcionMenu extends StatelessWidget {
         case opcionMenuOperador:
           Get.toNamed(nameOperadoresScreen);
           break;
+        case opcionMenuPagos:
+          Get.toNamed(namePagosScreen);
+          break;
         default:
       }
     }

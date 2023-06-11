@@ -28,31 +28,22 @@ class _HomeScreenState extends State<HomeScreen> {
     return bottomNavigationList[_bottomNavIndex]['titulo'].toString();
   }
 
+  Widget _obtenerBody() {
+    if (_bottomNavIndex == 0) {
+      return const OpcionesMenu();
+    } else if (_bottomNavIndex == 1) {
+      return const Center(child: Text('Soy configuraciones'));
+    }
+    return const SizedBox();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(_obtenerTitulo()),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Expanded(
-              child: Visibility(
-                visible: _bottomNavIndex == 0,
-                child: const OpcionesMenu(),
-              ),
-            ),
-            Expanded(
-              child: Visibility(
-                visible: _bottomNavIndex == 1,
-                child: const Text('Soy configuraciones'),
-              ),
-            ),
-          ],
-        ),
-      ),
+      body: _obtenerBody(),
       bottomNavigationBar: AnimatedBottomNavigationBar.builder(
         itemCount: bottomNavigationList.length,
         activeIndex: _bottomNavIndex,
