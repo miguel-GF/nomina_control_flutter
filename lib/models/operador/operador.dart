@@ -7,19 +7,21 @@ part 'operador.g.dart';
 @JsonSerializable()
 class Operador {
   Operador({
-    this.clienteId,
+    this.operadorId,
     this.folio,
     required this.nombre,
     required this.apellidos,
     this.status = statusActivo,
+    this.registroFecha,
   });
 
   factory Operador.fromJson(Map<String, dynamic> data) =>
       _$OperadorFromJson(data);
 
-  final int? clienteId;
+  final int? operadorId;
   final int? folio, status;
   final String nombre, apellidos;
+  final DateTime? registroFecha;
 
   Map<String, dynamic> toJson() => _$OperadorToJson(this);
 }
