@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
+import '../routes/name_pages.dart';
 import '../utils/assets_utils.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -16,11 +17,11 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Future<void> didChangeDependencies() async {
     if (_esInicio) {
-      await Future<void>.delayed(const Duration(seconds: 4));
+      await Future<void>.delayed(const Duration(seconds: 3));
       setState(() {
         _esInicio = false;
       });
-      Get.offNamed('home-screen');
+      Get.offNamed(nameHomeScreen);
     }
     super.didChangeDependencies();
   }
