@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../constants.dart';
+import '../../constants/constants_globals.dart';
 
 part 'operador.g.dart';
 
