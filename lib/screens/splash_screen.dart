@@ -12,18 +12,17 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
-  bool _esInicio = true;
+class _SplashScreenState extends State<SplashScreen>
+    with TickerProviderStateMixin {
+  late AnimationController _controller;
+
   @override
-  Future<void> didChangeDependencies() async {
-    if (_esInicio) {
-      await Future<void>.delayed(const Duration(seconds: 4));
-      setState(() {
-        _esInicio = false;
-      });
-      Get.offNamed(nameHomeScreen);
-    }
-    super.didChangeDependencies();
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(seconds: 3),
+      vsync: this,
+    );
   }
 
   @override
@@ -31,13 +30,16 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: SafeArea(
         child: Center(
-          child: SizedBox(
-            width: Get.width * 0.6,
-            child: Lottie.asset(
-              AssetsUtils.splashAnimation,
-              fit: BoxFit.cover,
-              filterQuality: FilterQuality.high,
-            ),
+          child: Lottie.asset(
+            AssetsUtils.splashAnimation,
+            controller: _controller,
+            height: Get.width * 0.6,
+            animate: true,
+            onLoaded: (LottieComposition composition) {
+              _controller
+                ..duration = composition.duration
+                ..forward().whenComplete(() => Get.offNamed(nameHomeScreen));
+            },
           ),
         ),
       ),
