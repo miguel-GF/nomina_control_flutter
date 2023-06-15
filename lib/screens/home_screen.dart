@@ -2,6 +2,7 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
+import '../themes/main_colors.dart';
 import '../widgets/home/opciones_menu.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -47,12 +48,12 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: AnimatedBottomNavigationBar.builder(
         itemCount: bottomNavigationList.length,
         activeIndex: _bottomNavIndex,
-        backgroundColor: Colors.black54,
+        backgroundColor: background,
         onTap: (int index) => setState(() => _bottomNavIndex = index),
         gapLocation: GapLocation.center,
         notchSmoothness: NotchSmoothness.verySmoothEdge,
         tabBuilder: (int index, bool isActive) {
-          final Color color = isActive ? Colors.white : Colors.grey.shade500;
+          final Color color = isActive ? darkPage : Colors.grey.shade500;
           return Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -74,7 +75,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: AutoSizeText(
                         bottomNavigationList[index]['titulo'],
                         maxLines: 1,
-                        style: TextStyle(color: color),
+                        style: Theme.of(context).textTheme.caption!.copyWith(
+                          color: color,
+                          fontWeight: FontWeight.w500,
+                        ),
                         group: autoSizeGroup,
                       ),
                     ),

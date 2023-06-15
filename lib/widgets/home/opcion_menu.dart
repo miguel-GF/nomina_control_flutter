@@ -57,11 +57,8 @@ class OpcionMenu extends StatelessWidget {
                 children: <Widget>[
                   AutoSizeText(
                     opcMenu.titulo,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    minFontSize: 14,
+                    style: Theme.of(context).textTheme.subtitle1,
+                    minFontSize: 13,
                     maxLines: 1,
                   ),
                 ],
