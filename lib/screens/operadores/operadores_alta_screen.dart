@@ -1,6 +1,11 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../controllers/operador_controller.dart';
+import '../../helpers/operador_helper.dart';
+import '../../models/operador/operador.dart';
+import '../../utils/widgets_utils.dart';
 import '../../widgets/common/the_bottom_sheet.dart';
 import '../../widgets/common/the_column_input.dart';
 
@@ -15,15 +20,38 @@ class _OperadoresAltaScreenState extends State<OperadoresAltaScreen> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController nombresTxtCtr = TextEditingController();
   final TextEditingController apellidosTxtCtr = TextEditingController();
+  final OperadorHelper operadorHelper = OperadorHelper();
   bool loader = false;
 
-  void onPressed() {
-    print('llego');
-    if (formKey.currentState!.validate()) {
-      print('correcto');
+  Future<void> onPressed() async {
+    try {
+      if (formKey.currentState!.validate()) {
+        setState(() {
+          loader = true;
+        });
+        FocusScope.of(context).unfocus();
+        final Operador operador = await operadorHelper.armarInsert(
+          nombre: nombresTxtCtr.text.trim(),
+          apellidos: apellidosTxtCtr.text.trim(),
+        );
+        await OperadorController().insert(operador: operador);
+        setState(() {
+          loader = false;
+        });
+        WidgetsUtils.showAwesomeDialog(
+          message: 'Operador agregado correctamente',
+        );
+        nombresTxtCtr.clear();
+        apellidosTxtCtr.clear();
+      }
+    } catch (e) {
       setState(() {
-        loader = true;
+        loader = false;
       });
+      WidgetsUtils.showAwesomeDialog(
+        dialogType: DialogType.error,
+        message: e.toString(),
+      );
     }
   }
 
