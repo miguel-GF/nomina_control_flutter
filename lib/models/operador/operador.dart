@@ -13,6 +13,7 @@ class Operador {
     required this.apellidos,
     this.status = statusActivo,
     this.registroFecha,
+    this.registroAutorId,
   });
 
   factory Operador.fromJson(Map<String, dynamic> data) =>
@@ -22,6 +23,7 @@ class Operador {
   final int? folio, status;
   final String nombre, apellidos;
   final DateTime? registroFecha;
+  final int? registroAutorId;
 
   Map<String, dynamic> toJson() => _$OperadorToJson(this);
 }

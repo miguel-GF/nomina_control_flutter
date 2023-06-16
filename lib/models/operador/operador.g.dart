@@ -15,6 +15,7 @@ Operador _$OperadorFromJson(Map<String, dynamic> json) => Operador(
       registroFecha: json['registroFecha'] == null
           ? null
           : DateTime.parse(json['registroFecha'] as String),
+      registroAutorId: json['registroAutorId'] as int?,
     );
 
 Map<String, dynamic> _$OperadorToJson(Operador instance) => <String, dynamic>{
@@ -24,4 +25,5 @@ Map<String, dynamic> _$OperadorToJson(Operador instance) => <String, dynamic>{
       'nombre': instance.nombre,
       'apellidos': instance.apellidos,
       'registroFecha': instance.registroFecha?.toIso8601String(),
+      'registroAutorId': instance.registroAutorId,
     };
