@@ -19,6 +19,7 @@ Color enabledColor = const Color.fromRGBO(255, 105, 240, 1.0);
 Color disabledColor = const Color.fromRGBO(200, 200, 200, 1.0);
 Color errorColor = const Color.fromRGBO(193, 0, 21, 1.0);
 Color bgCard = const Color.fromRGBO(219, 219, 219, 1.0);
+Color borderGray = const Color.fromRGBO(189, 189, 189, 1.0);
 
 MaterialColor kPrimaryColor = const MaterialColor(
   0xFF0E7AC7,
