@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/operador_controller.dart';
-import '../../models/operador/operador.dart';
 import '../../routes/name_pages.dart';
+import '../../themes/main_colors.dart';
+import '../../widgets/operadores/operador_tile.dart';
 
 class OperadoresScreen extends StatefulWidget {
   const OperadoresScreen({super.key});
@@ -14,12 +15,12 @@ class OperadoresScreen extends StatefulWidget {
 
 class _OperadoresScreenState extends State<OperadoresScreen> {
   bool isInit = true;
-  List<Operador> operadores = <Operador>[];
+  final OperadorController opController = Get.find<OperadorController>();
 
   @override
   Future<void> didChangeDependencies() async {
     if (isInit) {
-      operadores = await OperadorController().listar();
+      await opController.listar();
       isInit = false;
       setState(() {});
     }
@@ -32,24 +33,44 @@ class _OperadoresScreenState extends State<OperadoresScreen> {
       appBar: AppBar(
         title: const Text('Operadores'),
         actions: <Widget>[
-          IconButton(
+          TextButton(
             onPressed: () => Get.toNamed(nameOperadoresAltaScreen),
-            icon: const Icon(Icons.add_outlined),
+            child: Row(
+              children: <Widget>[
+                Text(
+                  'Agregar',
+                  style: Theme.of(context)
+                      .textTheme
+                      .caption!
+                      .copyWith(color: blanco),
+                ),
+                const SizedBox(width: 6),
+                Icon(Icons.add_outlined, color: blanco),
+              ],
+            ),
           ),
         ],
       ),
       body: Center(
         child: Column(
           children: <Widget>[
-            const Text('PANTALLA OPERADORES'),
             const SizedBox(height: 10),
             Expanded(
-              child: ListView.builder(
-                itemCount: operadores.length,
+              child: Obx(
+              () =>  ListView.builder(
+                itemCount: opController.operadores.length,
                 physics: const BouncingScrollPhysics(),
-                itemBuilder: (BuildContext context, int index) => Text(
-                    '${operadores[index].nombre} ${operadores[index].apellidos}'),
-              ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
+                itemBuilder: (BuildContext context, int index) => Column(
+                  children: <Widget>[OperadorTile(
+                          operador: opController.operadores[index]),
+                    
+                    if (opController.operadores.length != index - 1)
+                      const SizedBox(height: 16),
+                  ],
+                ),
+              ),),
             ),
           ],
         ),

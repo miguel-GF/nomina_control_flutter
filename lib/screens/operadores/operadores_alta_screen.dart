@@ -34,7 +34,8 @@ class _OperadoresAltaScreenState extends State<OperadoresAltaScreen> {
           nombre: nombresTxtCtr.text.trim(),
           apellidos: apellidosTxtCtr.text.trim(),
         );
-        await OperadorController().insert(operador: operador);
+        final OperadorController opController = Get.find<OperadorController>();
+        await opController.insert(operador: operador);
         setState(() {
           loader = false;
         });
@@ -43,6 +44,7 @@ class _OperadoresAltaScreenState extends State<OperadoresAltaScreen> {
         );
         nombresTxtCtr.clear();
         apellidosTxtCtr.clear();
+        await opController.listar();
       }
     } catch (e) {
       setState(() {
