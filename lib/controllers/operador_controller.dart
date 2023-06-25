@@ -5,6 +5,7 @@ import '../models/operador/operador.dart';
 
 class OperadorController extends GetxController {
   final OperadorDbhelper operadorDbhelper = OperadorDbhelper();
+  RxList<Operador> operadores = RxList<Operador>();
 
   Future<void> insert({required Operador operador}) async {
     try {
@@ -19,8 +20,10 @@ class OperadorController extends GetxController {
 
   Future<List<Operador>> listar() async {
     try {
-      final List<Operador> operadores = await operadorDbhelper.listar();
-      return operadores;
+      final List<Operador> listOperadores = await operadorDbhelper.listar();
+      operadores.value = listOperadores;
+      update();
+      return listOperadores;
     } catch (e) {
       rethrow;
     }
